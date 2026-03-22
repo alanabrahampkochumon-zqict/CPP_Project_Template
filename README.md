@@ -1,26 +1,49 @@
-# Math Library for CPP
+# Modern C++ Project Template
 
-Math Library build in CPP for Game Engine following Eric Lengyel's <a href="https://foundationsofgameenginedev.com/" target="_blank">Foundations fo Game Engine Development Series</a>
+A high-performance boilerplate for C++ development featuring CMake integration, Google Test (GTest) for unit testing, and Google Benchmark for performance analysis.
+Prerequisites
 
-Project uses CMake as it's build system.
+Ensure the following tools are installed and available in your system PATH:
 
-## How to run
+- <a href="https://cmake.org/download/" target="_blank">CMake</a> (3.25+): Build system generator.
 
-1. Download and install <a href="https://cmake.org/download/" target="_blank">CMake</a> and <a href="https://git-scm.com/install/windows" target="_blank">Git</a> if you don't have it installed.
+- <a href="https://git-scm.com/install/windows" target="_blank">Git</a>: Required for FetchContent dependency management.
 
-2. Generate project files using
-    ```bash
-        cmake -B build
-    ```
-    OR using
-    ```bash
-        genStrict.bat
-    ```
-3. Run the build using commandline
-    ```bash
-        cmake --build build
-        ./build/playground/Debug/Playground.exe # To Run the playground
-        ./build/math-test/Debug/MathTest.exe # To Run the tests
-    ```
-    OR
-    Run it in Visual Studio or your IDE of choice.
+- <a href="https://git-scm.com/install/windows" target="_blank">Doxygen(Doxywizard)</a> (Optional): Required to generate HTML/PDF documentation.
+
+- <a href="https://releases.llvm.org/download.html" target="_blank">Clang-Format</a> : Required for automated code style enforcement.
+
+## Getting Started
+
+### Configuration
+
+Initialize the build system and download dependencies.
+Bash
+
+`cmake -B build`
+
+### Compilation
+
+Compile the entire project, including tests and benchmarks.
+Bash
+
+`cmake --build build`
+
+### Developer Utilities
+
+Run these targets to maintain code quality and documentation.
+
+- Auto-Format: `cmake --build build --target format`
+
+- Generate Docs: cmake `--build build --target docs`
+
+## Build Configurations (Windows)
+
+The template includes two specialized batch scripts for rapid environment setup:
+Script Description Features
+
+_genStrict.bat_ Production/CI Mode Enables AddressSanitizer (ASAN) and treats all compiler warnings as errors (/W4 /WX).
+
+_genNoStrict.bat_ Development Mode Standard build without strict flags for faster iteration and debugging.
+
+**Note: You must run a configuration command (or script) before executing any --build targets.**
