@@ -54,4 +54,6 @@ include(dependencies.cmake)
 add_subdirectory(test-suite)
 add_subdirectory(benchmark-suite)
 
+set_target_properties(format docs PROPERTIES FOLDER "Dev Tools")
+
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT TestSuite)
