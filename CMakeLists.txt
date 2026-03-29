@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.25)
-project(GenericProject)
+project(GenericProject LANGUAGES CXX)
 
+add_library(ProjectStrictWarnings INTERFACE) # Used for linking Warning flags
 
 # Clang Formatter
 find_program(CLANG_FORMATTER NAMES clang-format)
@@ -42,9 +43,11 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 if(ENABLE_STRICT)
     message(STATUS "Turning on Address Sanitizer")
     if(MSVC)
-        add_compile_options(/fsanitize=address /WX /W4 /Wall /permissive- /fp:strict)
+        add_compile_options(/fsanitize=address)
+        target_compile_options(ProjectStrictWarnings INTERFACE $<$<COMPILE_LANGUAGE:CXX>:/WX /W4 /permissive- /fp:strict>)
     else()
-        add_compile_options(-fsanitize=address -fno-omit-frame-pointer -Wall -Wextra -Werror -pedantic-errors)
+        add_compile_options(-fsanitize=address -fno-omit-frame-pointer)
+        target_compile_options(ProjectStrictWarnings INTERFACE $<$<COMPILE_LANGUAGE:CXX>:-fno-omit-frame-pointer -Wall -Wextra -Werror -pedantic-errors>)
         add_link_options(-fsanitize=address)
     endif()
 endif()
@@ -53,6 +56,11 @@ include(dependencies.cmake)
 
 add_subdirectory(test-suite)
 add_subdirectory(benchmark-suite)
+
+# Link ProjectStrictWarnings to enable strict mode.
+target_link_libraries(TestSuite PRIVATE ProjectStrictWarnings)
+target_link_libraries(BenchmarkSuite PRIVATE ProjectStrictWarnings)
+
 
 set_target_properties(format docs PROPERTIES FOLDER "Dev Tools")
 
