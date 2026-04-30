@@ -3,6 +3,8 @@ project(GenericProject LANGUAGES CXX)
 
 add_library(ProjectStrictWarnings INTERFACE) # Used for linking Warning flags
 
+set(DevToolsDir "Dev Tools")
+
 # Clang Formatter
 find_program(CLANG_FORMATTER NAMES clang-format)
 
@@ -14,6 +16,7 @@ if(CLANG_FORMATTER)
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         COMMENT "Formatting source files..."
     )
+    set_target_properties(format PROPERTIES FOLDER ${DevToolsDir})
 else()
     message(WARNING "clang-format not found")
 endif()
@@ -31,6 +34,7 @@ if (DOXYGEN_FOUND)
         CONFIG_FILE ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile
         ALL
     )
+    set_target_properties(docs PROPERTIES FOLDER ${DevToolsDir})
 else()
     message(WARN "Doxygen not found! Skipping documentation generation.")
 endif()
@@ -61,7 +65,5 @@ add_subdirectory(benchmark-suite)
 target_link_libraries(TestSuite PRIVATE ProjectStrictWarnings)
 target_link_libraries(BenchmarkSuite PRIVATE ProjectStrictWarnings)
 
-
-set_target_properties(format docs PROPERTIES FOLDER "Dev Tools")
 
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT TestSuite)
