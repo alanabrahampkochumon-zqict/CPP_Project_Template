@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.25)
 project(GenericProject LANGUAGES CXX)
+enable_testing()
 
 add_library(ProjectStrictWarnings INTERFACE) # Used for linking Warning flags
 

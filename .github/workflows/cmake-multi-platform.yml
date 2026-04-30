@@ -16,12 +16,17 @@ jobs:
             # Set fail-fast to false to ensure that feedback is delivered for all matrix combinations. Consider changing this to true when your workflow is stable.
             fail-fast: false
 
-            # Set up a matrix to run the following 18 configurations:
+            # Set up a matrix to run the following 10 configurations:
             # 1. <Windows, Release, latest MSVC compiler toolchain on the default runner image, default generator>
+            # 1. <Windows, Debug, latest MSVC compiler toolchain on the default runner image, default generator>
             # 2. <Linux, Release, latest GCC compiler toolchain on the default runner image, default generator>
-            # 3. <Linux, Release, latest Clang compiler toolchain on the default runner image, default generator>
-            #
-            # To add more build types (Release, Debug, RelWithDebInfo, etc.) customize the build_type list.
+            # 4. <Linux, Debug, latest GCC compiler toolchain on the default runner image, default generator>
+            # 5. <Linux, Release, latest Clang compiler toolchain on the default runner image, default generator>
+            # 6. <Linux, Debug, latest Clang compiler toolchain on the default runner image, default generator>
+            # 7. <macOS, Release, latest GCC compiler toolchain on the default runner image, default generator>
+            # 8. <macOS, Debug, latest GCC compiler toolchain on the default runner image, default generator>
+            # 9. <macOS, Release, latest Clang compiler toolchain on the default runner image, default generator>
+            # 10. <macOS, Debug, latest Clang compiler toolchain on the default runner image, default generator>
             matrix:
                 os: [ubuntu-latest, windows-latest, macos-latest]
                 build_type: [Debug, Release]
@@ -52,6 +57,10 @@ jobs:
                       c_compiler: clang
                     - os: ubuntu-latest
                       c_compiler: cl
+                    - os: macos-latest
+                      c_compiler: cl
+                    - os: macos-latest
+                      cpp_compiler: cl
 
         steps:
             - uses: actions/checkout@v4
