@@ -1,5 +1,5 @@
 # Modern C++ Project Template
-
+[![Unit Tests](https://github.com/alanabrahampkochumon-zqict/CPP_Project_Template/actions/workflows/cmake-multi-platform.yml/badge.svg)](https://github.com/alanabrahampkochumon-zqict/CPP_Project_Template/actions/workflows/cmake-multi-platform.yml)
 A high-performance boilerplate for C++ development featuring CMake integration, Google Test (GTest) for unit testing, and Google Benchmark for performance analysis.
 
 # Prerequisites
