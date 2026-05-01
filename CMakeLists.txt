@@ -46,26 +46,39 @@ endif()
 # Turn on solution folders
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-# Enables Strict mode for all the projects globally.
+# Enables Strict Warnings and Debug-only ASan
 if(ENABLE_STRICT)
-    message(STATUS "Turning on Strict Mode")
-    if(MSVC)
-        target_compile_options(ProjectStrictWarnings INTERFACE $<$<COMPILE_LANGUAGE:CXX>:/WX /W4 /permissive- /fp:strict>)
+    message(STATUS "Configuring Strict Warnings")
+    if(MSVC AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+        target_compile_options(StrictWarnings INTERFACE
+            $<$<COMPILE_LANGUAGE:CXX>:/WX;/W4;/permissive-;/fp:strict>
+        )
     else()
-        target_compile_options(ProjectStrictWarnings INTERFACE $<$<COMPILE_LANGUAGE:CXX>:-fno-omit-frame-pointer -Wall -Wextra -Werror -pedantic-errors>)
+        target_compile_options(StrictWarnings INTERFACE
+            $<$<COMPILE_LANGUAGE:CXX>:-Wall;-Wextra;-Werror;-pedantic-errors>
+            $<$<CXX_COMPILER_ID:Clang>:-Wno-c++98-compat;-Wno-c++98-compat-pedantic;-Wno-pre-c++14-compat;-Wno-pre-c++17-compat;-Wno-c++20-compat>
+            $<$<CXX_COMPILER_ID:AppleClang>:-Wno-c++98-compat;-Wno-c++98-compat-pedantic;-Wno-pre-c++14-compat;-Wno-pre-c++17-compat;-Wno-c++20-compat>
+        )
     endif()
 endif()
 
 
 # Enables Address Sanitizer for all the projects globally.
 if(ASAN)
-    message(STATUS "Turning on Address Sanitizer")
-    if(MSVC)
-        add_compile_options(/fsanitize=address)
+    message(STATUS "Turning on Address Sanitizer for Debug Builds")
+    if(MSVC AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+        target_compile_options(StrictWarnings INTERFACE $<$<CONFIG:Debug>:/fsanitize=address;/Zi>)
+        target_link_options(StrictWarnings INTERFACE $<$<CONFIG:Debug>:/INCREMENTAL:NO>)
     else()
-        add_compile_options(-fsanitize=address -fno-omit-frame-pointer)
-        add_link_options(-fsanitize=address)
+        target_compile_options(StrictWarnings INTERFACE $<$<CONFIG:Debug>:-fsanitize=address;-fno-omit-frame-pointer>)
+        target_link_options(StrictWarnings INTERFACE $<$<CONFIG:Debug>:-fsanitize=address>)
     endif()
+endif()
+
+# Multi-processor compilation
+if(MSVC AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    message(STATUS "Enabling Multiprocessor compilation on MSVC")
+    add_compile_options("/MP")
 endif()
 
 include(dependencies.cmake)
