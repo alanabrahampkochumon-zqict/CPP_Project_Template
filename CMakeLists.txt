@@ -5,6 +5,9 @@ enable_testing()
 add_library(StrictWarnings INTERFACE) # Used for linking Warning flags
 add_library(ProjectASan INTERFACE) # Used for linking ASan
 
+# Turn on solution folders
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
 set(DevToolsDir "Dev Tools")
 
 # Clang Formatter
@@ -23,8 +26,23 @@ else()
     message(WARNING "clang-format not found")
 endif()
 
-option(ENABLE_STRICT "Enable Strict Warnings" OFF) # Option to enable compiler specific "Warning as Error"
-option(ASAN "Enable ASan" OFF) # Option to enable ASAN
+
+# Clang Tidy
+find_program(CLANG_TIDY_EXE NAMES clang-tidy)
+if(CLANG_TIDY_EXE)
+    # Create a custom target that you manually trigger
+    add_custom_target(
+        lint
+        COMMAND ${CMAKE_COMMAND} -E echo "Running Clang-Tidy on MathLib..."
+        COMMAND run-clang-tidy -p ${CMAKE_BINARY_DIR} -header-filter=.*
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        COMMENT "Running static analysis..."
+    )
+    set_target_properties(lint PROPERTIES FOLDER ${DevToolsDir})
+else()
+    message(WARNING "clang-tidy not found")
+endif()
+
 
 # Doxygen
 find_package(Doxygen)
@@ -43,8 +61,9 @@ else()
 endif()
 
 
-# Turn on solution folders
-set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
+option(ENABLE_STRICT "Enable Strict Warnings" OFF) # Option to enable compiler specific "Warning as Error"
+option(ASAN "Enable ASan" OFF) # Option to enable ASAN
 
 # Enables Strict Warnings and Debug-only ASan
 if(ENABLE_STRICT)
