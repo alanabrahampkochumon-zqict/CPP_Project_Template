@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.25)
 project(GenericProject LANGUAGES CXX)
 enable_testing()
 
-add_library(ProjectStrictWarnings INTERFACE) # Used for linking Warning flags
+add_library(StrictWarnings INTERFACE) # Used for linking Warning flags
 add_library(ProjectASan INTERFACE) # Used for linking ASan
 
 set(DevToolsDir "Dev Tools")
@@ -87,8 +87,8 @@ add_subdirectory(test-suite)
 add_subdirectory(benchmark-suite)
 
 # Link ProjectStrictWarnings to enable strict mode.
-target_link_libraries(TestSuite PRIVATE ProjectStrictWarnings)
-target_link_libraries(BenchmarkSuite PRIVATE ProjectStrictWarnings)
+target_link_libraries(TestSuite PRIVATE StrictWarnings)
+target_link_libraries(BenchmarkSuite PRIVATE StrictWarnings)
 
 
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT TestSuite)
