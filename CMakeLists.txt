@@ -3,6 +3,7 @@ project(GenericProject LANGUAGES CXX)
 enable_testing()
 
 add_library(ProjectStrictWarnings INTERFACE) # Used for linking Warning flags
+add_library(ProjectASan INTERFACE) # Used for linking ASan
 
 set(DevToolsDir "Dev Tools")
 
@@ -22,7 +23,8 @@ else()
     message(WARNING "clang-format not found")
 endif()
 
-option(ENABLE_STRICT "Enable ASan and Strict Warnings" OFF) # To turn on ASan, use cmake -D
+option(ENABLE_STRICT "Enable Strict Warnings" OFF) # Option to enable compiler specific "Warning as Error"
+option(ASAN "Enable ASan" OFF) # Option to enable ASAN
 
 # Doxygen
 find_package(Doxygen)
@@ -44,15 +46,24 @@ endif()
 # Turn on solution folders
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-# Enables Address Sanitizer for all the projects globally.
+# Enables Strict mode for all the projects globally.
 if(ENABLE_STRICT)
+    message(STATUS "Turning on Strict Mode")
+    if(MSVC)
+        target_compile_options(ProjectStrictWarnings INTERFACE $<$<COMPILE_LANGUAGE:CXX>:/WX /W4 /permissive- /fp:strict>)
+    else()
+        target_compile_options(ProjectStrictWarnings INTERFACE $<$<COMPILE_LANGUAGE:CXX>:-fno-omit-frame-pointer -Wall -Wextra -Werror -pedantic-errors>)
+    endif()
+endif()
+
+
+# Enables Address Sanitizer for all the projects globally.
+if(ASAN)
     message(STATUS "Turning on Address Sanitizer")
     if(MSVC)
         add_compile_options(/fsanitize=address)
-        target_compile_options(ProjectStrictWarnings INTERFACE $<$<COMPILE_LANGUAGE:CXX>:/WX /W4 /permissive- /fp:strict>)
     else()
         add_compile_options(-fsanitize=address -fno-omit-frame-pointer)
-        target_compile_options(ProjectStrictWarnings INTERFACE $<$<COMPILE_LANGUAGE:CXX>:-fno-omit-frame-pointer -Wall -Wextra -Werror -pedantic-errors>)
         add_link_options(-fsanitize=address)
     endif()
 endif()
