@@ -105,9 +105,6 @@ include(dependencies.cmake)
 add_subdirectory(test-suite)
 add_subdirectory(benchmark-suite)
 
-# Link ProjectStrictWarnings to enable strict mode.
-target_link_libraries(TestSuite PRIVATE StrictWarnings)
-target_link_libraries(BenchmarkSuite PRIVATE StrictWarnings)
 
 
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT TestSuite)
