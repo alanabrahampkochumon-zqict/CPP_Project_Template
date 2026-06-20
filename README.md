@@ -50,3 +50,6 @@ _genStrict.bat_ Production/CI Mode Enables AddressSanitizer (ASAN) and treats al
 _genNoStrict.bat_ Development Mode Standard build without strict flags for faster iteration and debugging.
 
 **Note: You must run a configuration command (or script) before executing any --build targets.**
+
+## Doxygen Configuration
+Use the <a href="https://www.doxygen.nl/download.html" target="_blank">Doxygen Wizard</a> to customize your project's configuration file.
