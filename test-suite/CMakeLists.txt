@@ -1,13 +1,18 @@
 add_executable(TestSuite)
 
 
-set(TestDir "src/")
-set(TestFiles "SampleTest.cpp")
-list(TRANSFORM TestFiles PREPEND ${TestDir})
-
+# Directories
+set(SourceDir "src/")
 set(IncludeDir "include/")
+
+
+# Files
+set(TestFiles "SampleTest.cpp")
+list(TRANSFORM TestFiles PREPEND ${SourceDir})
+
 set(IncludeFiles "Utils.h")
 list(TRANSFORM IncludeFiles PREPEND ${IncludeDir})
+
 
 target_sources(
     TestSuite
