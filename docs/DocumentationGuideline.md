@@ -5,7 +5,6 @@
 - **Tense:** Use present tense.
 - **Dialect:** Use American English.
 - **Entity References:** - Use `@ref` for internal classes, structs, and concepts to generate hyperlinks. - Use backticks ( \` \` ) for variables, constants, and `std` library types.
-- **Formulas:** Use LaTeX (enclosed in `$`) for mathematical definitions to ensure clarity.
 
 ### Doxygen Groups
 
@@ -28,7 +27,7 @@
 
 - **Style:** Mandatory Imperative (e.g., "Compute", "Perform", "Verify"). Do not repeat the function signature.
 - **Constraint:** Start with a capital letter and end with a period.
-- **Good:** `@brief Computes the dot product.`
+- **Good:** `@brief Compute the dot product.`
 - **Bad:** `@brief This function returns the dot product as a T.`
 
 ### Note (`@note`)
@@ -76,7 +75,7 @@
 
 ### Test Body Commenting
 
-- **Documentation**- Use `@test` to write a brief description of what the test are supposed to verify.
+- **Documentation**- Use `@brief` to write a brief description of what the test are supposed to verify.
 - **Language** - Keep language simple, preferably under 1 sentence.
 - **Constraints** - Don't use `@ref` unless testing more than 1 instance of the same procedure. For example, `normalize` vs `safeNormalize` vs `tryNormalize`.
 - **Structure:** Optionally use **Given / When / Then** blocks to separate setup, action, and assertion.
