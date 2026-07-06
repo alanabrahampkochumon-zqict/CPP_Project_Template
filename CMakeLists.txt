@@ -127,7 +127,7 @@ if (MSVC AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     add_compile_options("/MP")
 endif ()
 
-include(dependencies.cmake)
+include(cmake/dependencies.cmake)
 
 add_subdirectory(src)
 add_subdirectory(tests)
