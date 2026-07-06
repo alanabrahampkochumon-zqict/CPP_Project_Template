@@ -19,13 +19,15 @@ BraceWrapping:
     SplitEmptyNamespace: false
 BreakBeforeTernaryOperators: true
 CompactNamespaces: false
+InsertNewlineAtEOF: true
+KeepEmptyLinesAtEOF: false
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
-ColumnLimit: 120
 Cpp11BracedListStyle: false
 IncludeBlocks: Regroup
 IndentCaseLabels: true
 IndentPPDirectives: BeforeHash
 IndentWidth: 4
+InsertBraces: true
 Language: Cpp
 MaxEmptyLinesToKeep: 4
 NamespaceIndentation: All
