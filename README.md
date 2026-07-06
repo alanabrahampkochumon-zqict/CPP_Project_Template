@@ -2,7 +2,8 @@
 
 # Modern C++ Project Template
 
-A high-performance boilerplate for C++ development featuring CMake integration, Google Test (GTest) for unit testing, and Google Benchmark for performance analysis.
+A high-performance boilerplate for C++ development featuring CMake integration, Google Test (GTest) for unit testing,
+and Google Benchmark for performance analysis.
 
 # Prerequisites
 
@@ -10,11 +11,21 @@ Ensure the following tools are installed and available in your system PATH:
 
 - <a href="https://cmake.org/download/" target="_blank">CMake</a> (3.25+): Build system generator.
 
-- <a href="https://git-scm.com/install/windows" target="_blank">Git</a>: Required for FetchContent dependency management.
+- <a href="https://git-scm.com/install/windows" target="_blank">Git</a>: Required for FetchContent dependency
+  management.
 
-- <a href="https://git-scm.com/install/windows" target="_blank">Doxygen(Doxywizard)</a> (Optional): Required to generate HTML/PDF documentation.
+- <a href="https://git-scm.com/install/windows" target="_blank">Doxygen(Doxywizard)</a> (Optional): Required to generate
+  HTML/PDF documentation.
 
-- <a href="https://releases.llvm.org/download.html" target="_blank">Clang-Format</a> : Required for automated code style enforcement.
+- <a href="https://releases.llvm.org/download.html" target="_blank">Clang-Format</a> : Required for automated code style
+  enforcement.
+
+## CMake Configuration
+
+- **ENABLE_STRICT**: Enables application level strict mode by enforcing "treating all warnings as errors". **ON** by
+  default
+  in both CI/CD and CMakePresets.
+- **ENABLE_TEST**: Enables *test application*. **ON** by default in both CI/CD and CMakePresets.
 
 ## Getting Started
 
@@ -52,4 +63,6 @@ _genNoStrict.bat_ Development Mode Standard build without strict flags for faste
 **Note: You must run a configuration command (or script) before executing any --build targets.**
 
 ## Doxygen Configuration
-Use the <a href="https://www.doxygen.nl/download.html" target="_blank">Doxygen Wizard</a> to customize your project's configuration file.
+
+Use the <a href="https://www.doxygen.nl/download.html" target="_blank">Doxygen Wizard</a> to customize your project's
+configuration file.
