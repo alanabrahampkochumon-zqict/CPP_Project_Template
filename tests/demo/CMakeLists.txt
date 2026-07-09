@@ -1,24 +1,15 @@
 add_executable(TestSuite)
 
-
-# Directories
-set(SourceDir "${CMAKE_CURRENT_SOURCE_DIR}/src/")
 set(IncludeDir "${CMAKE_CURRENT_SOURCE_DIR}/include/")
-
-
-# Files
-set(TestFiles "SampleTest.cpp")
-list(TRANSFORM TestFiles PREPEND ${SourceDir})
+set(ROOT_TEST_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 set(IncludeFiles "Utils.h")
 list(TRANSFORM IncludeFiles PREPEND ${IncludeDir})
 
+add_subdirectory(demo)
 
 target_sources(
         TestSuite
-        PRIVATE
-        ${TestFiles}
-
         PRIVATE
         FILE_SET HEADERS
         BASE_DIRS ${IncludeDir}
@@ -34,6 +25,7 @@ target_link_libraries(
         TestSuite PRIVATE
         GTest::gtest_main
         StrictWarnings
+        DemoTests
 )
 
 include(GoogleTest)

@@ -1,19 +1,9 @@
 add_executable(BenchmarkSuite)
 
-
-#Directories
-set(SourceDir "${CMAKE_CURRENT_SOURCE_DIR}/src/")
-
-
-# Files
-set(SrcFiles "SampleBenchmark.cpp")
-list(TRANSFORM SrcFiles PREPEND ${SourceDir})
-
-
 target_sources(
         BenchmarkSuite
         PRIVATE
-        ${SrcFiles}
+        SampleBenchmark.cpp
 )
 
 target_precompile_headers(
