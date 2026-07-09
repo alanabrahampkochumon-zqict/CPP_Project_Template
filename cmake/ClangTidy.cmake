@@ -1,5 +1,6 @@
-find_program(CLANG_TIDY_EXE NAMES clang-tidy)
+include_guard()
 
+find_program(CLANG_TIDY_EXE NAMES clang-tidy)
 if (CLANG_TIDY_EXE)
     # Create a custom target that you manually trigger
     add_custom_target(

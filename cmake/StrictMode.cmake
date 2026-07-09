@@ -1,3 +1,5 @@
+include_guard()
+
 option(ENABLE_STRICT "Enable Strict Warnings" OFF) # Option to enable compiler specific "Warning as Error"
 
 add_library(StrictWarnings INTERFACE) # Used for linking Warning flags

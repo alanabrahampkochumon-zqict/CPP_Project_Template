@@ -1,5 +1,6 @@
-find_program(CLANG_FORMATTER NAMES clang-format)
+include_guard()
 
+find_program(CLANG_FORMATTER NAMES clang-format)
 if (CLANG_FORMATTER)
     file(GLOB_RECURSE ALL_SOURCE_FILES *.cpp *.h *.cxx *.hxx *.hpp *.cc *.hh *.tpp *.inl)
 

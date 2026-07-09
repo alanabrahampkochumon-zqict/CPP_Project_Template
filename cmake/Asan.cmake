@@ -1,3 +1,4 @@
+include_guard()
 option(ASAN "Enable ASan" OFF) # Option to enable ASAN
 
 add_library(ProjectASan INTERFACE) # Used for linking ASan
