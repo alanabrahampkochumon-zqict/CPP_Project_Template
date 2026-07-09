@@ -20,6 +20,13 @@ if (MSVC AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     add_compile_options("/MP")
 endif ()
 
+# Interprocedural Optimization
+include(CheckIPOSupported)
+check_ipo_supported(RESULT IPO_SUPPORT)
+if(IPO_SUPPORTED)
+    message(STATUS "Turning on Interprocedural Optimization")
+    set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ${IPO_SUPPORTED})
+endif ()
 
 add_subdirectory(src)
 add_subdirectory(tests)
