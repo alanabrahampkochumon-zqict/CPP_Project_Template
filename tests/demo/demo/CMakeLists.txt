@@ -14,5 +14,5 @@ target_link_libraries(
         DemoTests PRIVATE
         GTest::gtest
         GTest::gtest_main
-        StrictWarnings
+        ${PROJECT_NAME}-StrictWarnings
 )

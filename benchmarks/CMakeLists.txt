@@ -21,5 +21,5 @@ target_link_libraries(
         PRIVATE
         benchmark::benchmark
         benchmark::benchmark_main
-        StrictWarnings
+        ${PROJECT_NAME}-StrictWarnings
 )
