@@ -51,17 +51,6 @@ Run these targets to maintain code quality and documentation.
 
 - Generate Docs: cmake `--build build --target docs`
 
-## Build Configurations (Windows)
-
-The template includes two specialized batch scripts for rapid environment setup:
-Script Description Features
-
-_genStrict.bat_ Production/CI Mode Enables AddressSanitizer (ASAN) and treats all compiler warnings as errors (/W4 /WX).
-
-_genNoStrict.bat_ Development Mode Standard build without strict flags for faster iteration and debugging.
-
-**Note: You must run a configuration command (or script) before executing any --build targets.**
-
 ## Doxygen Configuration
 
 Use the <a href="https://www.doxygen.nl/download.html" target="_blank">Doxygen Wizard</a> to customize your project's
